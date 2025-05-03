@@ -68,16 +68,26 @@ export default {
     }
   },
   mounted() {
-    // Deteksi domain saat ini ketika komponen di-mount
     if (typeof window !== 'undefined') {
-      // Jika kita berada di domain github.io, gunakan domain github.io
-      if (window.location.hostname.includes('github.io')) {
-        this.scriptDomain = window.location.origin;
+      const currentUrl = window.location.href;
+      const urlObject = new URL(currentUrl);
+      
+      let basePath = urlObject.pathname;
+      if (basePath.endsWith('.html') || basePath.endsWith('/')) {
+        basePath = basePath.substring(0, basePath.lastIndexOf('/') + 1);
+      } else if (!basePath.includes('.')) {
+        if (!basePath.endsWith('/')) {
+          basePath += '/';
+        }
       }
-      // Jika kita berada di domain lain (bukan localhost)
-      else if (window.location.hostname !== 'localhost') {
-        this.scriptDomain = window.location.origin;
+      
+      this.scriptDomain = `${urlObject.protocol}//${urlObject.host}${basePath}`.replace(/\/$/, '');
+      
+      if (urlObject.hostname === 'localhost' && basePath.includes('/paperless-agent/')) {
+        this.scriptDomain = `${urlObject.protocol}//${urlObject.host}`;
       }
+      
+      console.log('Script domain detected:', this.scriptDomain);
     }
   },
   methods: {
