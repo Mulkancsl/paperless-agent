@@ -84,7 +84,7 @@ export default {
       this.scriptDomain = `${urlObject.protocol}//${urlObject.host}${basePath}`.replace(/\/$/, '');
       
       if (urlObject.hostname === 'localhost' && basePath.includes('/paperless-agent/')) {
-        this.scriptDomain = `${urlObject.protocol}//${urlObject.host}`;
+        this.scriptDomain = `${urlObject.protocol}//${urlObject.host}/paperless-agent`;
       }
       
       console.log('Script domain detected:', this.scriptDomain);
