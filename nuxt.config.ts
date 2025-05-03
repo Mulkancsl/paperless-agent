@@ -16,7 +16,8 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ]
-    }
+    },
+    baseURL: process.env.NUXT_APP_BASE_URL || '/paperless-agent/'
   },
   devtools: { enabled: true },
   plugins: [
