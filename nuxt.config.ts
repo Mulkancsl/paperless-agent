@@ -17,7 +17,7 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ]
     },
-    baseURL: '/paperless-agent/'
+    baseURL: process.env.NUXT_APP_BASE_URL || '/paperless-agent/'
   },
   devtools: { enabled: true },
   plugins: [
@@ -25,9 +25,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:3000',
-      scriptDomain: process.env.NUXT_PUBLIC_SCRIPT_DOMAIN || 'http://localhost:3000'
+      apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:3000'
     }
-  },
-  ssr: false,
+  }
 })
