@@ -4,10 +4,10 @@
       <div class="bg-white rounded-lg p-6 border">
         <h2 class="text-xl font-bold mb-2">Halo, Assalamualaikum</h2>
         <p class="text-gray-600 text mb-4">
-          Selamat datang di Paperless Agent, ini adalah sebuah <b>Prototipe</b> platform yang dirancang untuk membantu Anda mengelola dan mengoptimalkan kinerja pengguna website Anda dengan lebih efisien. Kami percaya bahwa teknologi dapat menjadi alat yang kuat untuk meningkatkan produktivitas dan mengurangi biaya operasional.
+          Selamat datang di Paperless Agent, ini adalah sebuah <b>Prototype</b> platform yang dirancang untuk membantu Anda mengelola dan mengoptimalkan kinerja pengguna website Anda dengan lebih efisien. Kami percaya bahwa teknologi dapat menjadi alat yang kuat untuk meningkatkan produktivitas dan mengurangi biaya operasional.
         </p>
-        <div class="flex gap-2 mt-4">
-          <span class="text-gray-600 text mb-4">
+        <div class="flex flex-col md:flex-row gap-2 mt-4">
+          <span class="text-gray-600 text mb-4 md:mb-0">
             Jika ada pertanyaan, mari terhubung dengan saya:
           </span>
           <a href="mailto:mulkancsl95@gmail.com" class="px-4 py-2 border rounded hover:bg-gray-50 flex items-center gap-1 text-sm">
