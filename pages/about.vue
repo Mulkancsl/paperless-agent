@@ -4,8 +4,16 @@
       <div class="bg-white rounded-lg p-6 border">
         <h2 class="text-xl font-bold mb-2">Halo, Assalamualaikum</h2>
         <p class="text-gray-600 text mb-4">
-          Selamat datang di Paperless Agent, ini adalah sebuah <b>Prototype</b> platform yang dirancang untuk membantu Anda mengelola dan mengoptimalkan kinerja pengguna website Anda dengan lebih efisien. Kami percaya bahwa teknologi dapat menjadi alat yang kuat untuk meningkatkan produktivitas dan mengurangi biaya operasional.
+          Selamat datang di Paperless Agent, ini adalah sebuah <b>Prototype</b> platform yang dirancang untuk membantu Anda mengelola dan mengoptimalkan kinerja pengguna website Anda dengan lebih efisien. Kami percaya bahwa teknologi dapat menjadi alat yang kuat untuk meningkatkan produktivitas dan mengurangi biaya operasional.       
         </p>
+        <span class="me-2">Kereen?? yaudah</span>
+        <span>
+          <NuxtLink to="/" class="hover:text-blue-500">
+            <button class="px-4 py-2 border rounded hover:bg-gray-50 text-sm">
+                Yuk Kita Coba
+            </button>
+          </NuxtLink>
+        </span>
         <div class="flex flex-col md:flex-row gap-2 mt-4">
           <span class="text-gray-600 text mb-4 md:mb-0">
             Jika ada pertanyaan, mari terhubung dengan saya:

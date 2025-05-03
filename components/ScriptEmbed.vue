@@ -9,11 +9,6 @@
       <div class="bg-gray-50 rounded border p-4 text-sm font-mono overflow-x-auto whitespace-nowrap mb-1">
         <div class="flex items-center justify-between">
           <pre class="text-gray-700">&lt;script</pre>
-          <button class="text-gray-400 hover:text-gray-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-            </svg>
-          </button>
         </div>
         <pre class="text-gray-700">  src="{{ scriptDomain }}/chat-by-voice-embedded.min.js"</pre>
         <pre class="text-gray-700">  chat-hash="52hvqigiwhxlnhjt4lnfj"</pre>
@@ -43,7 +38,7 @@
       </button>
       <NuxtLink to="/about" class="hover:text-blue-500">
         <button class="px-4 py-2 border rounded hover:bg-gray-50 flex items-center gap-1 text-sm">
-            About This Agent
+            Tentang Agent Ini
         </button>
       </NuxtLink>
     </div>
