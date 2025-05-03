@@ -15,7 +15,7 @@
             </svg>
           </button>
         </div>
-        <pre class="text-gray-700">  src="{{ scriptDomain }}/chat-by-voice-embedded.min.js"</pre>
+        <pre class="text-gray-700">  src="http://localhost:3000/chat-by-voice-embedded.min.js"</pre>
         <pre class="text-gray-700">  chat-hash="52hvqigiwhxlnhjt4lnfj"</pre>
         <pre class="text-gray-700">  defer&gt;</pre>
         <pre class="text-gray-700">&lt;/script&gt;</pre>
@@ -50,69 +50,48 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      scriptDomain: 'http://localhost:3000',
-      copySuccess: false
-    };
-  },
-  computed: {
-    scriptText() {
-      return `<script 
-    src="${this.scriptDomain}/chat-by-voice-embedded.min.js" 
+<script setup>
+import { ref } from 'vue';
+
+const scriptText = `<script 
+    src="http://localhost:3000/chat-by-voice-embedded.min.js" 
     chat-hash="52hvqigiwhxlnhjt4lnfj"
     defer
 ><\/script>`;
+
+const copySuccess = ref(false);
+
+// Fungsi untuk menyalin script ke clipboard
+const copyScriptToClipboard = async () => {
+  try {
+    await navigator.clipboard.writeText(scriptText);
+    copySuccess.value = true;
+    
+    setTimeout(() => {
+      copySuccess.value = false;
+    }, 2000);
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+    
+    const textarea = document.createElement('textarea');
+    textarea.value = scriptText;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    
+    try {
+      document.execCommand('copy');
+      copySuccess.value = true;
+      setTimeout(() => {
+        copySuccess.value = false;
+      }, 2000);
+    } catch (err) {
+      console.error('Fallback failed:', err);
+      alert('Failed to copy script to clipboard');
     }
-  },
-  mounted() {
-    // Deteksi domain saat ini ketika komponen di-mount
-    if (typeof window !== 'undefined') {
-      // Jika kita berada di domain github.io, gunakan domain github.io
-      if (window.location.hostname.includes('github.io')) {
-        this.scriptDomain = window.location.origin;
-      }
-      // Jika kita berada di domain lain (bukan localhost)
-      else if (window.location.hostname !== 'localhost') {
-        this.scriptDomain = window.location.origin;
-      }
-    }
-  },
-  methods: {
-    async copyScriptToClipboard() {
-      try {
-        await navigator.clipboard.writeText(this.scriptText);
-        this.copySuccess = true;
-        
-        setTimeout(() => {
-          this.copySuccess = false;
-        }, 2000);
-      } catch (err) {
-        console.error('Failed to copy: ', err);
-        
-        const textarea = document.createElement('textarea');
-        textarea.value = this.scriptText;
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
-        textarea.select();
-        
-        try {
-          document.execCommand('copy');
-          this.copySuccess = true;
-          setTimeout(() => {
-            this.copySuccess = false;
-          }, 2000);
-        } catch (err) {
-          console.error('Fallback failed:', err);
-          alert('Failed to copy script to clipboard');
-        }
-        
-        document.body.removeChild(textarea);
-      }
-    }
+    
+    document.body.removeChild(textarea);
   }
 };
 </script>
