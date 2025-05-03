@@ -4,7 +4,7 @@
       <div class="bg-white rounded-lg p-6 border">
         <ScriptEmbed />
       </div>
-      <div class="bg-white rounded-lg p-6 border" v-if="true">
+      <div class="bg-white rounded-lg p-6 border" v-if="false">
         <AgentChat />
       </div>
     </div>
