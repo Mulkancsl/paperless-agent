@@ -15,7 +15,7 @@
             </svg>
           </button>
         </div>
-        <pre class="text-gray-700">  src="http://localhost:3000/chat-by-voice-embedded.min.js"</pre>
+        <pre class="text-gray-700">  src="{{ scriptUrl }}/chat-by-voice-embedded.min.js"</pre>
         <pre class="text-gray-700">  chat-hash="52hvqigiwhxlnhjt4lnfj"</pre>
         <pre class="text-gray-700">  defer&gt;</pre>
         <pre class="text-gray-700">&lt;/script&gt;</pre>
@@ -51,20 +51,50 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useRuntimeConfig } from 'nuxt/app';
 
-const scriptText = `<script 
-    src="http://localhost:3000/chat-by-voice-embedded.min.js" 
+const config = useRuntimeConfig();
+const currentDomain = ref('');
+const scriptUrl = computed(() => {
+  // Gunakan value dari .env jika tersedia (untuk development/production)
+  if (config.public.apiBaseUrl && config.public.apiBaseUrl !== 'http://localhost:3000') {
+    return config.public.apiBaseUrl;
+  }
+  
+  // Jika tidak ada di config, gunakan domain saat ini
+  if (currentDomain.value) {
+    return currentDomain.value;
+  }
+  
+  // Fallback ke localhost jika semua opsi di atas gagal
+  return 'http://localhost:3000';
+});
+
+// Generate script text yang akan di-copy
+const scriptText = computed(() => {
+  return `<script 
+    src="${scriptUrl.value}/chat-by-voice-embedded.min.js" 
     chat-hash="52hvqigiwhxlnhjt4lnfj"
     defer
 ><\/script>`;
+});
 
 const copySuccess = ref(false);
+
+// Deteksi domain saat komponen dimount
+onMounted(() => {
+  // Cek apakah berjalan di browser
+  if (typeof window !== 'undefined') {
+    // Ambil origin dari URL saat ini (protocol + domain + port)
+    currentDomain.value = window.location.origin;
+  }
+});
 
 // Fungsi untuk menyalin script ke clipboard
 const copyScriptToClipboard = async () => {
   try {
-    await navigator.clipboard.writeText(scriptText);
+    await navigator.clipboard.writeText(scriptText.value);
     copySuccess.value = true;
     
     setTimeout(() => {
@@ -74,7 +104,7 @@ const copyScriptToClipboard = async () => {
     console.error('Failed to copy: ', err);
     
     const textarea = document.createElement('textarea');
-    textarea.value = scriptText;
+    textarea.value = scriptText.value;
     textarea.style.position = 'fixed';
     textarea.style.opacity = '0';
     document.body.appendChild(textarea);
